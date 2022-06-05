@@ -1,0 +1,108 @@
+<!doctype html>
+    <html lang="ko">
+    <head>  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+        <title>승준닷컴</title>
+        <style>
+          body{
+            border-left:solid;
+            border-left:outset black;
+            border-right:solid;
+            border-right:outset black;
+            padding-left:10px;
+            padding-right:10px;
+            margin-left: 250px;
+            margin-right:250px;
+            margin-top:0px;
+          }
+          h1{
+            font-size:70px;
+            border-bottom:solid;
+            border-bottom:outset black;
+            margin-bottom:20px;
+            margin-top:0px;
+            padding-bottom:40px;
+
+          }
+          h3{
+            margin-top:100px;
+          }
+          
+          form{
+            display:inline;
+          }
+          nav{
+            text-align: center;
+          }
+          th,td{
+            border:1px solid black;
+            border-collapse: collapse;
+          }
+          table{
+            table-layout: fixed;
+          }
+        </style>
+    </head>
+    <body>
+        <h1><a href="/">승준닷컴</a>
+        <%if(loging){%>
+            <a style = "font-size:35px; float:right;" href="/user/create_account">회원가입</a>
+            <form style="float:right; position:static; font-size:30px;" action = "/user/logout_process" method="post">
+                <input type = "submit" value ="로그아웃">
+            </form>
+        <%}else{%>
+            <p style="float:right;">
+              <a style="font-size:35px;" href="/user/login">로그인</a>
+              <a style="font-size:35px;" href="/user/create_account">회원가입</a>
+            </p>
+        <%}%>
+        </h1>
+        <h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="50" scope="col">id</th>
+                <th scope="col" width="900">title</th>
+                <th scope="col">author</th>
+                <th scope="col">date</th>
+                <th width="100" scope="col">views</th>
+              </tr>
+            </thead>
+          <tbody>
+            <%for(let i=list.length-1;i>=0;i--){%>
+              <tr>
+                <%-list[i]%>
+              </tr>
+            <%}%>
+          </tbody>
+          </table>
+          제목 찾기<br>
+          <form action="/topic/search" method="post" >
+            <input type="text" name="title">
+            <button type="submit">검색</button>
+          </form>
+
+          <%if(loging){%>
+            <p style ="float:right; font-size:25px;"><a href="/topic/create">글 작성<a></p>
+            <%}%>
+        <nav>
+            <ul class="pagination justify-content-center">
+              <li>
+                <a href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <%for(let i = 1;i<numOfpage+1;i++){%>
+                <li><a href="/<%=i%>""> <%=i%></a></li>
+              <%}%>        
+              <li>
+                <a href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </h3>
+    </body>
+    </html>

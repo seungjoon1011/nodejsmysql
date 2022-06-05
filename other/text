@@ -1,0 +1,21 @@
+<%var keyNum = numOfpage - pg%>
+            <%console.log(JSON.stringify(topics), 'hi', keyNum,numOfpage,pg)%>
+            <%if(pg==1){%>
+                <%for(let i = topics.length-1;i>=20*(numOfpage-1);i--){%>
+                    <li><a href="/${topics[i].id}">topics[i].title</a></li>
+                <%}%>
+            <%}else{%>
+                <%for(let i = 19+20*keyNum;i>=20*keyNum;i--){%>
+                    <li><a href="/${topics[i].id}">topics[i].title</a></li>
+                <%}%>
+            <%}%>
+
+            if(pg==1){
+            for(let i = topics.length-1;i>=20*(numOfpage-1);i--){
+                list[i] = `<td><a href="/topic/${topics[i].id}">${topics[i].id}</td><td><a href="/topic/${topics[i].id}">${topics[i].title}</a></td><td>${topics[i].name}</td><td>${template2.CheckTime(topics[i].time)}</td>`
+            }
+        }else{
+            for(let i = 19+20*keyNum;i>=20*keyNum;i--){
+                list[i] = `<td><a href="/topic/${topics[i].id}">${topics[i].id}</td><td><a href="/topic/${topics[i].id}">${topics[i].title}</a></td><td>${topics[i].name}</td><td>${template2.CheckTime(topics[i].time)}</td>`
+            }
+        }

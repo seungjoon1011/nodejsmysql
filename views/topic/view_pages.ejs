@@ -1,0 +1,104 @@
+<!doctype html>
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        
+        <title>id<%=Id%></title>
+        <style>
+            h1{
+            font-size:70px;
+            border-bottom:solid;
+            border-bottom:outset black;
+            margin-bottom:30px;
+            margin-top:0px;
+            padding-bottom:40px;
+          }
+            body{
+                border-left:solid;
+            border-left:outset black;
+            border-right:solid;
+            border-right:outset black;
+            padding-left:10px;
+            padding-right:10px;
+            margin-left: 250px;
+            margin-right:250px;
+            margin-top:0px;
+          }
+        </style>
+    </head>
+    <body>
+        <h1><a href="/">승준닷컴</a>
+            <%if(loging){%>
+                <a style = "font-size:35px; float:right;" href="/user/create_account">회원가입</a>
+                <form style="float:right; position:static; font-size:30px;" action = "/user/logout_process" method="post">
+                    <input type = "submit" value ="로그아웃">
+                </form>
+            <%}else{%>
+                <p style="float:right;">
+                    <a style="font-size:35px;" href="/user/login">로그인</a>
+                    <a style="font-size:35px;" href="/user/create_account">회원가입</a>
+                    
+                </p>
+            <%}%>
+            </h1>
+    <h1>
+        <%if(`${update_time}`!=`1970년1월1일 9:0:0`){%>
+            <%=title%>(수정됨)
+        <%}else{%>
+            <%=title%>
+        <%}%>
+        <p style="float:right; font-size:35px;"><%=time%>
+            <%if(`${update_time}`!=`1970년1월1일 9:0:0`){%>
+                <br>
+                <%=update_time%>에 수정됨
+            <%}%><br>by <%=author%></p>
+       
+  </h1>
+  <p style ="float:right; font-size:35px;">
+    조회수 : <%=views%>
+    </p>
+    <h2 style="border-bottom:solid; border-color:black;"><%-description%>
+        
+        <br><br>
+    </h2>
+        <h2>
+        <%if(`${topic_user_id}`!=`undefined`){%>
+            <%if(`${topic_user_id}`==`${user_id}`){%>
+                <a style="float:right;" href="/topic/update/<%=Id%>">업데이트</a>
+                <form style="float:right;" action ="/topic/delete_process" method="post">
+                    <input type="hidden" name="id" value="<%=Id%>">
+                    <input type="submit" value="삭제">
+                </form> 
+            <%}%>
+        <%}%>
+        </h2>
+        <%if(com==1){%> 
+            <h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">comment</th>
+                    <th scope="col">date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(let i = 0;i<=comlist.length-1;i++){%>
+                    <tr>
+                        <%-comlist[i]%>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+        <%}%>
+        <%if(loging){%>
+            <form action="/comments/create_process" method="post">
+                <input type="hidden" name="id" value="<%=Id%>">
+                <textarea class="form-control lg" name="comments" rows="3" placeholder="write a comment"></textarea>
+                <input style="float:right;" type="submit" value="등록">
+            </form>
+        <%}%>
+            </h2>
+    </body>
+    </html>
